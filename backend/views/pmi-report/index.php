@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use dosamigos\datepicker\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\PmiReportSearch */
@@ -24,11 +25,24 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'pmi_id',
+            //'pmi_id',
             'pmi_docnum',
             'approved_by',
             'verified_by',
-            'pmi_date',
+            //'pmi_date',
+            [
+                        'attribute' => 'pmi_date',
+                        'value' => 'pmi_date',
+                        'format' => 'raw',
+                        'filter' => DatePicker::widget([
+                            'model' => $searchModel,
+                            'attribute' => 'pmi_date',
+                            'clientOptions' => [
+                                'autoclose' => true,
+                                'format' => 'yyyy-m-d'
+                            ]
+                        ])
+                    ],
             // 'address_id',
             // 'job_id',
             // 'employee_id',

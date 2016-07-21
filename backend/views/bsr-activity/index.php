@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use dosamigos\datepicker\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\BsrActivitySearch */
@@ -18,33 +19,50 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Bsr Activity', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?= GridView::widget([
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'rowOptions' => function($model){
-                  if($model->bs_status == 0){
-                      return ['class' => 'success'];
-                  }else{
-                      return ['class' => 'danger'];
-                  }
+        'rowOptions' => function($model) {
+            if ($model->bs_status == 0) {
+                return ['class' => 'success'];
+            } else {
+                return ['class' => 'danger'];
+            }
         },
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            //'bs_id',
-            //'bs_status',
-            'bs_qty',
-            'weight',
-            'number_seen',
-            // 'employee_id',
-            // 'bs_condition',
-            // 'bs_comments:ntext',
-            // 'bsr_id',
-            'equipment_id',
-            // 'bs_date',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
+                    //'bs_id',
+                    //'bs_status',
+                    [
+                        'attribute' => 'bsr_id',
+                        'value' => 'bsrHeader.bsr_docnum',
+                    ],
+                    [
+                        'attribute' => 'bs_date',
+                        'value' => 'bsrHeader.bsr_date',
+                        'format' => 'raw',
+                        'filter' => DatePicker::widget([
+                            'model' => $searchModel,
+                            'attribute' => 'bs_date',
+                            'clientOptions' => [
+                                'autoclose' => true,
+                                'format' => 'yyyy-m-d'
+                            ]
+                        ])
+                    ],
+                    'bs_qty',
+                    'weight',
+                    'number_seen',
+                    // 'employee_id',
+                    // 'bs_condition',
+                    // 'bs_comments:ntext',
+                    // 'bsr_id',
+                    //'equipment_id',
+                    // 'bs_date',
+                    ['class' => 'yii\grid\ActionColumn'],
+                ],
+            ]);
+            ?>
     
- 
+

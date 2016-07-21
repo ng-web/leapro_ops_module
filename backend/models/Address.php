@@ -68,7 +68,7 @@ class Address extends \yii\db\ActiveRecord
         ];
     }
     
-    //return name of parish
+    //return name of parish, custom method
     public function getParish()
     {
         if ($this->address_province === 0)
@@ -77,7 +77,7 @@ class Address extends \yii\db\ActiveRecord
         }
     }
     
-    //return customer type
+    //return customer type, custom method
     public function getType()
     {
         if ($this->address_type === 0)

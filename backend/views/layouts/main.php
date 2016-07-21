@@ -36,8 +36,38 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'Bait Station Report', 'url' => ['/bsr-header/index']],
-        ['label' => 'PMI', 'url' => ['/pmi-activity/index']],
+        [
+            'label' => 'Client Center',
+            'items' => [
+                 ['label' => 'New Customer ', 'url' => 'http://localhost/leaprocrm/backend/web/index.php?r=customer'],
+                 //'<li class="divider"></li>',
+                 //'<li class="dropdown-header">Dropdown Header</li>',
+                 ['label' => 'Address', 'url' => 'http://localhost/leaprocrm/backend/web/index.php?r=address'],
+                ['label' => 'Address', 'url' => 'http://localhost/leaprocrm/backend/web/index.php?r=area'],
+            ],
+        ],
+        [
+            'label' => 'Equipment',
+            'items' => [
+                 ['label' => 'Add Equipment ', 'url' => 'http://localhost/leaprocrm/backend/web/index.php?r=equipment'],
+                 //'<li class="divider"></li>',
+                 //'<li class="dropdown-header">Dropdown Header</li>',
+                 ['label' => 'Deploy Equipment', 'url' => 'http://localhost/leaprocrm/backend/web/index.php?r=deploy'],
+                //['label' => 'Address', 'url' => 'http://localhost/leaprocrm/backend/web/index.php?r=deploy'],
+            ],
+        ],
+        [
+            'label' => 'Reports',
+            'items' => [
+                 ['label' => 'Bait Station Report ', 'url' => 'http://localhost/leaprocrm/backend/web/index.php?r=bsr-header'],
+                 ['label' => 'Bait Station Activity ', 'url' => 'http://localhost/leaprocrm/backend/web/index.php?r=bsr-activity'],
+                 //'<li class="divider"></li>',
+                 //'<li class="dropdown-header">Dropdown Header</li>',
+                 ['label' => 'Pest Management Inspection', 'url' => 'http://localhost/leaprocrm/backend/web/index.php?r=pmi-report'],
+            ],
+        ],
+        //['label' => 'Bait Station Report', 'url' => ['/bsr-header/index']],
+        //['label' => 'PMI', 'url' => ['/pmi-activity/index']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
