@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Deploy;
+use backend\models\Events;
 
 /**
- * DeploySearch represents the model behind the search form about `backend\models\Deploy`.
+ * EventsSearch represents the model behind the search form about `backend\models\Events`.
  */
-class DeploySearch extends Deploy
+class EventsSearch extends Events
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class DeploySearch extends Deploy
     public function rules()
     {
         return [
-            [['deploy_id', 'customer_id', 'address_id', 'equipment_id'], 'integer'],
-            [['deploy_date', 'deploy_notes', 'area_id'], 'safe'],
+            [['event_id'], 'integer'],
+            [['event_title', 'event_description', 'event_start', 'event_end'], 'safe'],
         ];
     }
 
@@ -41,7 +41,9 @@ class DeploySearch extends Deploy
      */
     public function search($params)
     {
-        $query = Deploy::find();
+        $query = Events::find();
+
+        // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -54,20 +56,16 @@ class DeploySearch extends Deploy
             // $query->where('0=1');
             return $dataProvider;
         }
-        
-        $query->joinWith('area');
 
+        // grid filtering conditions
         $query->andFilterWhere([
-            'deploy_id' => $this->deploy_id,
-            'customer_id' => $this->customer_id,
-            'address_id' => $this->address_id,
-            //'area_id' => $this->area_id,
-            'equipment_id' => $this->equipment_id,
-            'deploy_date' => $this->deploy_date,
+            'event_id' => $this->event_id,
+            'event_start' => $this->event_start,
+            'event_end' => $this->event_end,
         ]);
 
-        $query->andFilterWhere(['like', 'deploy_notes', $this->deploy_notes])
-                ->andFilterWhere(['like', 'area.area_name', $this->area_id]);
+        $query->andFilterWhere(['like', 'event_title', $this->event_title])
+            ->andFilterWhere(['like', 'event_description', $this->event_description]);
 
         return $dataProvider;
     }

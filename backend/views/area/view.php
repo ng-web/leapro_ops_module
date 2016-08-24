@@ -34,5 +34,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'area_description:ntext',
         ],
     ]) ?>
+    
+     <h1>Locations</h1>
+    <hr/>
+    <?php
+ //var_dump($areaStations); die();
+        foreach ($areaStations as $stations){
+            echo '<div class="well"> '. $stations['equipment_name']. '<br/>' ;
+                    //. $address->address_line1. '<br/>' 
+                    //. $address->address_province. '<br/>'. '</div>';
+        }
+    ?>
 
 </div>

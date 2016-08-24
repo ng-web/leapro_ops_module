@@ -49,8 +49,23 @@ class AreaController extends Controller
      */
     public function actionView($id)
     {
+        $areaStations = Yii::$app->db->createCommand('SELECT customer_company, address_line1, area_name, equipment_name, COUNT(*) as total_deployed FROM deploy DP
+                    INNER JOIN customer C 
+                    ON DP.customer_id = C.customer_id
+                    INNER JOIN address A 
+                    ON DP.address_id = A.address_id
+                    INNER JOIN area L 
+                    ON DP.area_id = L.area_id
+                    INNER JOIN equipment E
+                    ON DP.equipment_id = E.equipment_id
+                    WHERE L.area_id = :id
+                    GROUP BY area_name')
+                    ->bindValue(':id', $id)
+                    ->queryAll();
+        
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'areaStations' => $areaStations,
         ]);
     }
 

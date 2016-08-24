@@ -8,6 +8,9 @@ use backend\models\CustomerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\SqlDataProvider;
+use yii\helpers\Json;
+
 
 /**
  * CustomerController implements the CRUD actions for Customer model.
@@ -40,6 +43,48 @@ class CustomerController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+    
+    //custom view
+    public function actionGetCustomers()
+    {
+        $sql = 'SELECT * FROM customer';
+        $raw = Yii::$app->db->createCommand($sql)->queryAll();
+        
+        return $raw;
+    }
+    
+    public function actionCustomIndex()
+    {
+        $data['customers'] = $this->actionGetCustomers();
+       // $data['locations'] = $this->actionGetLocations();
+        
+        return $this->render('custom-index', $data);
+    }
+       
+    public function actionGetLocations($id)
+    {
+        $sql = "SELECT * FROM address WHERE customer_id =".$id;
+        $raw = Yii::$app->db->createCommand($sql)->queryAll();
+        
+        return $raw;
+    }
+    
+    public function actionCustomView($id)
+    {
+        $data['id'] = $id;
+        
+        $locations = $this->actionGetLocations();
+        foreach($locations as $location){
+            
+            if ($id==$location['id']){
+                //this is then our target book
+                $data['name'] = $location['customer_name'];
+                $data['company'] = $location['customer_company'];
+            }
+        }
+        
+        return $this->render('custom-view', $data);
+    }
 
     /**
      * Displays a single Customer model.
@@ -48,6 +93,22 @@ class CustomerController extends Controller
      */
     public function actionView($id)
     {
+        //$locations = actionGetLocations($id);
+//        var_dump($id); die();
+//        foreach($locations as $location){
+//            
+//        //var_dump($location['customer_id']); die();
+//
+//            //this is then our target book
+//            $data['address'] = $location['address_line1'];
+//            $data['province'] = $location['address_province'];
+//            
+//        }
+//        //var_dump($data[]); die();
+        
+//        $model = $this->findModel($id);
+        //var_dump($model->getAddresses()); die(); 
+//        var_dump($model->addresses); die();
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);

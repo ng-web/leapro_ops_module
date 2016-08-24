@@ -19,8 +19,13 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'css/dhtmlxscheduler.css'
     ];
     public $js = [
+        'js/dhtmlxscheduler.js',
+        'js/dhtmlxscheduler_editors.js',
+        'js/dhtmlxscheduler_minical.js',
+        'js/dhtmlxscheduler_recurring.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

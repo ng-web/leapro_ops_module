@@ -50,7 +50,7 @@ class EventController extends Controller
             $event->description = $sched->description;
             $event->start = $sched->start_date;
             $event->end = $sched->end_date;
-            //$event->url = 'index.php?r=event/view';
+//            $event->url = 'index.php?r=event/view';
             $event->startEditable = true;
             
             $tasks[] = $event;
@@ -63,11 +63,11 @@ class EventController extends Controller
         ]);
     }
     
-    public function actionJson()
-    {
-        $cal = Event::find()->all();
-        echo Json::encode($cal);
-    }
+//    public function actionJson()
+//    {
+//        $cal = Event::find()->all();
+//        echo Json::encode($cal);
+//    }
     
     //event url function
     public function actionUrl($id)
@@ -103,21 +103,6 @@ class EventController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             
-            $recurr = $model->recurring;
-            $frequency = $model->period;
-            $until = (365/$frequency);
-            
-            if ($recurr == true && $frequency == 1){
-                
-                 for($x = 0; $x <$until; $x++){
-                     
-                    $start_date = strtotime($start . '+' . $repeat_freq . 'DAYS');
-                    $end_date = strtotime($end . '+' . $repeat_freq . 'DAYS');
-                    $start = date("Y-m-d H:i", $start_date);
-                    $end = date("Y-m-d H:i";, $end_date);
-                 }
-                
-            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [

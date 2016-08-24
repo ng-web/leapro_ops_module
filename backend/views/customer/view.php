@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Customer */
@@ -34,5 +35,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'customer_details:ntext',
         ],
     ]) ?>
-
+    <h1>Locations</h1>
+    <hr/>
+    <?php
+        foreach ($model->addresses as $address){
+            echo '<div class="well"> '. $address->address_line1. '<br/>' 
+                    . $address->address_line1. '<br/>' 
+                    . $address->address_province. '<br/>'. '</div>';
+        }
+    ?>
+    
 </div>

@@ -31,7 +31,11 @@ $this->params['breadcrumbs'][] = $this->title;
             //'deploy_id',
             'customer.customer_name',
             'address.address_line1',
-            'area.area_name',
+            //'area.area_name',
+            [
+                'attribute' => 'area_id',
+                'value' => 'area.area_name',
+            ],
             'equipment_id',
             // 'deploy_date',
             // 'deploy_notes:ntext',

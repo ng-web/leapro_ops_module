@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
         Modal::begin([
           'header'=>'<h4>Areas</h4>',
           'id'=>'modal',
-          'size'=>'modal-lg',
+          'size'=>'modal-md',
           ]);
 
         echo "<div id='modalContent'></div>";

@@ -6,9 +6,9 @@ use yii\web\Controller;
 
 class CalcController extends \yii\base\Controller
 {
-    public function actionCalculate() 
+    public function actionIndex() 
     {
         echo "Ready to Calculate!!";
-        return $this->render('calc');
+        return $this->render('index');
     }
 }

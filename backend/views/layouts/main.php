@@ -64,6 +64,7 @@ AppAsset::register($this);
                  //'<li class="divider"></li>',
                  //'<li class="dropdown-header">Dropdown Header</li>',
                  ['label' => 'Pest Management Inspection', 'url' => 'http://localhost/leaprocrm/backend/web/index.php?r=pmi-report'],
+                 ['label' => 'PMI Activity', 'url' => 'http://localhost/leaprocrm/backend/web/index.php?r=pmi-activity'],
             ],
         ],
         //['label' => 'Bait Station Report', 'url' => ['/bsr-header/index']],

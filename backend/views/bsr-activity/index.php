@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'attribute' => 'bs_date',
                             'clientOptions' => [
                                 'autoclose' => true,
-                                'format' => 'yyyy-m-d'
+                                'format' => 'yyyy-mm-dd'
                             ]
                         ])
                     ],
@@ -63,6 +63,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\ActionColumn'],
                 ],
             ]);
-            ?>
+            
+            foreach ($stationsByDocnum as $stationByDocnum){
+            echo '<div class="well"> '. $stationByDocnum['equipment_id'] . '<br/>';
+                   // . $address->address_line1. '<br/>' 
+                   // . $address->address_province. '<br/>'. '</div>';
+            }
+            
+            
     
 
