@@ -29,8 +29,16 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             //'deploy_id',
-            'customer.customer_name',
-            'address.address_line1',
+            //'customer.customer_name',
+            [
+                'attribute' => 'customer_id',
+                'value' => 'customer.customer_name',
+            ],
+            //'address.address_line1',
+            [
+                'attribute' => 'address_id',
+                'value' => 'address.address_line1',
+            ],
             //'area.area_name',
             [
                 'attribute' => 'area_id',

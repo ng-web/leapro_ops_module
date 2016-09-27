@@ -21,6 +21,7 @@ class AppAsset extends AssetBundle
         'css/site.css',
         //'css/fullcalendar.print.css',
         'css/fullcalendar.min.css',
+        '//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',
     ];
     public $js = [
         'js/main.js',

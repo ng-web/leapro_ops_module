@@ -57,9 +57,9 @@ class AreaController extends Controller
                     ON DP.equipment_id = E.equipment_id
                     WHERE L.area_id = :id')
                     ->bindValue(':id', $id)
-                    ->queryAll();
+                    ->queryAll(); 
         
-        $totalStations = Yii::$app->db->createCommand('SELECT equipment_name, COUNT(*) AS total_deployed 
+        $totalStations = Yii::$app->db->createCommand('SELECT COUNT(*) AS total_deployed 
                     FROM deploy DP
                     INNER JOIN area L 
                     ON DP.area_id = L.area_id
@@ -69,7 +69,8 @@ class AreaController extends Controller
                     WHERE L.area_id = :id
                     GROUP BY area_name')
                     ->bindValue(':id', $id)
-                    ->queryAll();
+                    ->queryScalar();
+            //var_dump($totalStations); die();
         
         return $this->render('view', [
             'model' => $this->findModel($id),

@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Customer */
@@ -35,14 +36,48 @@ $this->params['breadcrumbs'][] = $this->title;
             'customer_details:ntext',
         ],
     ]) ?>
-    <h1>Locations</h1>
-    <hr/>
-    <?php
-        foreach ($model->addresses as $address){
-            echo '<div class="well"> '. $address->address_line1. '<br/>' 
-                    . $address->address_line1. '<br/>' 
-                    . $address->address_province. '<br/>'. '</div>';
-        }
-    ?>
     
 </div>
+
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Locations</a></li>
+    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Equipment Deployed</a></li>
+    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Active Equipment</a></li>
+    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home"> 
+        <h1>Locations</h1>
+    <hr/>
+    <?php
+        $url = Url::toRoute(['product/view', 'id' => 42]);
+        foreach ($model->addresses as $address){
+            echo '<i class="fa fa-building-o" aria-hidden="true"></i>' . '<div class="well"> '. $address->address_line1. '$url'. '<br/>' 
+//                    . $address->address_line1. '<br/>' 
+//                    . $address->address_province. '<br/>'. 
+                    . '</div>';
+        }
+    ?></div>
+    <div role="tabpanel" class="tab-pane" id="profile">yag</div>
+    <div role="tabpanel" class="tab-pane" id="messages">...</div>
+    <div role="tabpanel" class="tab-pane" id="settings">...</div>
+  </div>
+
+</div>
+
+<?php $this->registerJs(
+        "$('#myTabs a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+          })
+          
+        $('#myTabs a[href='#profile]').tab('show') // Select tab by name
+        $('#myTabs a:first').tab('show') // Select first tab
+        $('#myTabs a:last').tab('show') // Select last tab
+        $('#myTabs li:eq(2) a').tab('show') // Select third tab (0-indexed)
+");

@@ -35,14 +35,23 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
     
-   
+    <h3>Total Stations</h3>
+    <?php
+    if(!$totalStations){
+        echo 'No Bait Stations are deployed';
+    }else{
+     echo $totalStations;
+    }
+    ?>
     
      <h1>Bait Stations</h1>
     <hr/>
     <?php
  //var_dump($areaStations); die();
         foreach ($areaStations as $stations){
-            echo '<div class="well"> '. $stations['equipment_name']. '</div>' . '<br/>' ;
+            
+            echo '<div class="well">'
+            . '<img style="-webkit-user-select: none" src="http://madsenworld.dk/anigif/light/red_bl.gif">'.  $stations['equipment_name']. '</div>' . '<br/>' ;
                     //. $address->address_line1. '<br/>' 
                     //. $address->address_province. '<br/>'. '</div>';
         }
